@@ -2,11 +2,18 @@
 <html>
   <head>
     <title>My experiment</title>
-    <script src="jspsych-6.3.0/jspsych.js"></script>
-    <script src="jspsych-6.3.0/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="jspsych-6.3.0/plugins/jspsych-survey-likert.js"></script>
-    <script src="jspsych-6.3.0/plugins/jspsych-preload.js"></script>
-    <link href="jspsych-6.3.0/css/jspsych.css" rel="stylesheet" type="text/css">
+    <!-- jsPsych library -->
+    <base target="_top">
+    <!-- jsPsych library -->
+    <script src="https://guryoso.in/jsPsychSheet/jspsych/jspsych.js"></script>
+    <script src="https://guryoso.in/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="https://guryoso.in/jsPsychSheet/jspsych/plugins/jspsych-survey-likert.js"></script>
+    <script src="https://guryoso.in/jsPsychSheet/jspsych/plugins/jspsych-preload.js"></script>
+    <link rel="stylesheet" href="https://guryoso.in/jsPsychSheet/jspsych/css/jspsych.css">
+
+    <!-- jsPsychSheet library -->
+    <script src="https://guryoso.in/jsPsychSheet/jspsychsheet.js"></script>
+    <link rel="stylesheet" href="https://guryoso.in/jsPsychSheet/jspsychsheet.css">
   </head>
   <body></body>
   <script>
@@ -40,18 +47,40 @@ console.log(metascramble);
 /* create  timeline */
 var timeline = [];
 
-/* preloading content */
+/* preloading content
 var preload = {
   type: 'preload',
-  images: ['img/1.png', 'img/2.png', 'img/3.png', 'img/4.png', 'img/5.png', 'img/6.png', 'img/7.png', 
-  'img/8.png', 'img/9.png', 'img/10.png', 'img/11.png', 'img/12.png', 'img/13.png', 'img/14.png', 'img/15.png',
-  'img/16.png', 'img/17.png', 'img/18.png', 'img/19.png', 'img/20.png', 'img/21.png', 'img/22.png', 'img/23.png',
-  'img/24.png', 'img/25.png', 'img/26.png', 'img/27.png', 'img/28.png', 'img/29.png', 'img/30.png', 'img/31.png', 'img/32.png',
-  'img/33.png', 'img/34.png', 'img/35.png', 'img/36.png', 'img/37.png', 'img/38.png', 'img/39.png', 'img/40.png', 'img/41.png',
-  'img/42.png', 'img/43.png', 'img/44.png', 'img/45.png', 'img/46.png', 'img/47.png', 'img/48.png', 'img/49.png', 'img/50.png',
-  'img/51.png', 'img/52.png', 'img/53.png', 'img/54.png', 'img/55.png', 'img/56.png', 'img/57.png', 'img/58.png', 'img/59.png',
-  'img/60.png']
-}
+  images: ['https://your-github-username.github.io/jsPsychSheet/experiment/img/1.png', 'https://your-github-username.github.io/jsPsychSheet/experiment/img/2.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/3.png', 'https://guryoso.io/jsPsychSheet/experiment/img/4.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/5.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/6.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/7.png', 'https://guryoso.io/jsPsychSheet/experiment/img/8.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/9.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/10.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/11.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/12.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/13.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/14.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/15.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/16.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/17.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/18.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/19.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/20.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/21.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/22.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/23.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/24.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/25.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/26.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/27.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/28.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/29.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/30.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/31.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/32.png',
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/33.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/34.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/35.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/36.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/37.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/38.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/39.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/40.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/41.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/42.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/43.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/44.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/45.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/46.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/47.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/48.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/49.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/50.png',
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/51.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/52.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/53.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/54.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/55.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/56.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/57.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/58.png', 
+  'https://guryoso.github.io/jsPsychSheet/experiment/img/59.png', 'https://guryoso.github.io/jsPsychSheet/experiment/img/60.png']
+} */
 
 /* Creating text array */
 var captions = [
@@ -145,6 +174,8 @@ var captions = [
  jsPsych.init({
     minimum_valid_rt: 200,
     timeline: timeline
+    on_finish: function() {
+      jsPsychSheet.uploadData(jsPsych.data.get().csv());
 });
 
     /* intro sequence*/
@@ -177,7 +208,7 @@ for (i = 0; i < 9; i++) {
         type: "html-keyboard-response",
         stimulus: `
         <div style='width: 700px;'>
-        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        <div style='float: center;'><img src='https://guryoso.github.io/jsPsychSheet/experiment/img/` + bildscramble[i] + `.png'></img>`,
         choices: jsPsych.NO_KEYS,
         prompt: captions[i][conditionscramble[0]],
         trial_duration: 1000, 
@@ -234,7 +265,7 @@ for (i = 10; i < 19; i++) {
         type: "html-keyboard-response",
          stimulus: `
         <div style='width: 700px;'>
-        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        <div style='float: center;'><img src='https://guryoso.github.io/jsPsychSheet/experiment/img/` + bildscramble[i] + `.png'></img>`,
         choices: jsPsych.NO_KEYS,
         prompt: captions[i][conditionscramble[1]],
         trial_duration: 1000, 
@@ -289,7 +320,7 @@ for (i = 20; i < 29; i++) {
         type: "html-keyboard-response",
          stimulus: `
         <div style='width: 700px;'>
-        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        <div style='float: center;'><img src='https://guryoso.github.io/jsPsychSheet/experiment/img/` + bildscramble[i] + `.png'></img>`,
         choices: jsPsych.NO_KEYS,
         prompt: captions[i][conditionscramble[2]],
         trial_duration: 1000, 
@@ -344,7 +375,7 @@ for (i = 20; i < 29; i++) {
         type: "html-keyboard-response",
          stimulus: `
         <div style='width: 700px;'>
-        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        <div style='float: center;'><img src='https://guryoso.github.io/jsPsychSheet/experiment/img/` + bildscramble[i] + `.png'></img>`,
         choices: jsPsych.NO_KEYS,
         prompt: captions[i][conditionscramble[0]],
         trial_duration: 1000, 
@@ -399,7 +430,7 @@ for (i = 20; i < 29; i++) {
         type: "html-keyboard-response",
          stimulus: `
         <div style='width: 700px;'>
-        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        <div style='float: center;'><img src='https://guryoso.github.io/jsPsychSheet/experiment/img/` + bildscramble[i] + `.png'></img>`,
         choices: jsPsych.NO_KEYS,
         prompt: captions[i][conditionscramble[1]],
         trial_duration: 1000, 
@@ -454,7 +485,7 @@ for (i = 20; i < 29; i++) {
         type: "html-keyboard-response",
          stimulus: `
         <div style='width: 700px;'>
-        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        <div style='float: center;'><img src='https://guryoso.github.io/jsPsychSheet/experiment/img/` + bildscramble[i] + `.png'></img>`,
         choices: jsPsych.NO_KEYS,
         prompt: captions[i][conditionscramble[2]],
         trial_duration: 1000, 
