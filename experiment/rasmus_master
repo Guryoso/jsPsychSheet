@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="jspsych-6.3.0/jspsych.js"></script>
+    <script src="jspsych-6.3.0/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.3.0/plugins/jspsych-survey-likert.js"></script>
+    <script src="jspsych-6.3.0/plugins/jspsych-preload.js"></script>
+    <link href="jspsych-6.3.0/css/jspsych.css" rel="stylesheet" type="text/css">
+  </head>
+  <body></body>
+  <script>
+
+/* å = &aring;, ä = &auml;, ö = &ouml; */
+/* , 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+          35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+          52, 53, 54, 55, 56, 57, 58, 59, 60 */
+
+/* generate subject id */
+var subject_id = jsPsych.randomization.randomID(15);
+
+/* create randomized picture order */
+let a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+          18, 19, 20]
+var bildscramble = jsPsych.randomization.repeat(a, 1);
+console.log(bildscramble);
+
+
+/* create randomized condition order */
+let b = [0, 1, 2]
+var conditionscramble = jsPsych.randomization.repeat(b, 1);
+console.log(conditionscramble);
+/* Conditions: (1) humor, (2) reappraisal, (3) neutral */
+
+/* create randomized meta-cognition order */
+let c = [" tredjepersons-", " förstapersons-"]
+var metascramble = jsPsych.randomization.repeat(c, 1);
+console.log(metascramble);
+
+/* create  timeline */
+var timeline = [];
+
+/* preloading content */
+var preload = {
+  type: 'preload',
+  images: ['img/1.png', 'img/2.png', 'img/3.png', 'img/4.png', 'img/5.png', 'img/6.png', 'img/7.png', 
+  'img/8.png', 'img/9.png', 'img/10.png', 'img/11.png', 'img/12.png', 'img/13.png', 'img/14.png', 'img/15.png',
+  'img/16.png', 'img/17.png', 'img/18.png', 'img/19.png', 'img/20.png', 'img/21.png', 'img/22.png', 'img/23.png',
+  'img/24.png', 'img/25.png', 'img/26.png', 'img/27.png', 'img/28.png', 'img/29.png', 'img/30.png', 'img/31.png', 'img/32.png',
+  'img/33.png', 'img/34.png', 'img/35.png', 'img/36.png', 'img/37.png', 'img/38.png', 'img/39.png', 'img/40.png', 'img/41.png',
+  'img/42.png', 'img/43.png', 'img/44.png', 'img/45.png', 'img/46.png', 'img/47.png', 'img/48.png', 'img/49.png', 'img/50.png',
+  'img/51.png', 'img/52.png', 'img/53.png', 'img/54.png', 'img/55.png', 'img/56.png', 'img/57.png', 'img/58.png', 'img/59.png',
+  'img/60.png']
+}
+
+/* Creating text array */
+var captions = [
+    ["Humor here 1", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 2", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 3", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 4", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 5", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 6", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 7", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 8", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 9", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 10", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 11", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 12", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 13", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 14", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 15", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 16", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 17", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 18", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 19", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 20", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 21", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 22", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 23", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 24", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 25", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 26", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 27", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 28", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 29", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 30", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 31", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 32", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 33", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 34", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 35", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 36", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 37", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 38", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 39", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 40", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 41", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 42", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 43", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 44", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 45", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 46", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 47", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 48", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 49", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 50", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 51", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 52", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 53", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 54", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 55", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 56", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 57", "Reappraisal here 2", "Neutral here 2"],
+    ["Humor here 58", "Reappraisal here 3", "Neutral here 3"],
+    ["Humor here 59", "Reappraisal here 1", "Neutral here 1"],
+    ["Humor here 60", "Reappraisal here 2", "Neutral here 2"],
+]
+
+
+    /* welcome message */
+    var welcome = {
+      type: "html-keyboard-response",
+      stimulus: "V&auml;lkommen till experimentet. Tryck p&aring; valfri knapp f&ouml;r att g&aring; vidare."
+    };
+    
+    /* intro + samtycke */
+    var instructions = {
+  type: "html-keyboard-response",
+  stimulus: 
+  `
+    <p>Samtycke samtycke samtycke samtycke</p> 
+    <p>samtycke samtycke samtycke samtycke</p>
+    <p>samtycke samtycke samtycke samtycke</p>
+    <p>samtycke samtycke samtycke samtycke</p>
+    <p>samtycke samtycke samtycke samtycke</p>
+    <p class='small'><strong>Vill du avsluta utan att medverka, är det bara att stänga den h&auml;r rutan</strong>
+    <strong><br>Godkänner du att medverka i studien, tryck på knappen J</br></strong></p>
+  `,
+  choices: ['esc', 'j'],
+  post_trial_gap: 2000
+};
+
+    /* start the timeline/experiment */
+ jsPsych.init({
+    minimum_valid_rt: 200,
+    timeline: timeline
+});
+
+    /* intro sequence*/
+/*intro.push(preload); */
+timeline.push(welcome);
+timeline.push(instructions);
+
+    /* fixation cross*/
+var fixation = {
+  type: 'html-keyboard-response',
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 1000,
+}
+
+                                                                /* block 1 */
+
+/* block-instruction */
+var block_instr = {
+    type: "html-keyboard-response",
+    stimulus: "I denna del &auml;r din uppgift att f&ouml;rs&ouml;ka se dig sj&auml;lv fr&aring;n ett" + metascramble[0] + 
+    "perspektiv. Tryck p&aring; valfri knapp f&ouml;r att g&aring; vidare.",
+}
+
+timeline.push(block_instr);
+
+var i;
+for (i = 0; i < 9; i++) {
+    var bild = {
+        type: "html-keyboard-response",
+        stimulus: `
+        <div style='width: 700px;'>
+        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        choices: jsPsych.NO_KEYS,
+        prompt: captions[i][conditionscramble[0]],
+        trial_duration: 1000, 
+    }
+
+
+    /* fixation cross*/
+    var fixation = {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+}
+    
+    var scale_1 = [
+        "Inte alls", 
+        "Lite", 
+        "Något", 
+        "Mycket", 
+        "Extremt"
+    ];
+    
+    var arousal = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur negativ k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    var valence = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur intensiv k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    timeline.push(fixation);
+    timeline.push(bild);
+    timeline.push(arousal);
+    timeline.push(valence);
+
+};
+
+                                                                /* block 2 */
+/* block-instruction */
+var block_instr = {
+    type: "html-keyboard-response",
+    stimulus: "I denna del &auml;r din uppgift att f&ouml;rs&ouml;ka se dig sj&auml;lv fr&aring;n ett" + metascramble[0] + 
+    "perspektiv. Tryck p&aring; valfri knapp f&ouml;r att g&aring; vidare.",
+}
+timeline.push(block_instr);
+
+var i;
+for (i = 10; i < 19; i++) {
+    var bild = {
+        type: "html-keyboard-response",
+         stimulus: `
+        <div style='width: 700px;'>
+        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        choices: jsPsych.NO_KEYS,
+        prompt: captions[i][conditionscramble[1]],
+        trial_duration: 1000, 
+    }
+
+    /* fixation cross*/
+    var fixation = {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+}
+    
+    var scale_1 = [
+        "Inte alls", 
+        "Lite", 
+        "Något", 
+        "Mycket", 
+        "Extremt"
+    ];
+    
+    var arousal = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur negativ k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    var valence = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur intensiv k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    timeline.push(fixation);
+    timeline.push(bild);
+    timeline.push(arousal);
+    timeline.push(valence);
+};
+
+                                                                /* block 3 */
+/* block-instruction */
+var block_instr = {
+    type: "html-keyboard-response",
+    stimulus: "I denna del &auml;r din uppgift att f&ouml;rs&ouml;ka se dig sj&auml;lv fr&aring;n ett" + metascramble[0] + 
+    "perspektiv. Tryck p&aring; valfri knapp f&ouml;r att g&aring; vidare.",
+}
+timeline.push(block_instr);
+
+var i;
+for (i = 20; i < 29; i++) {
+    var bild = {
+        type: "html-keyboard-response",
+         stimulus: `
+        <div style='width: 700px;'>
+        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        choices: jsPsych.NO_KEYS,
+        prompt: captions[i][conditionscramble[2]],
+        trial_duration: 1000, 
+    }
+
+    /* fixation cross*/
+    var fixation = {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+}
+    
+    var scale_1 = [
+        "Inte alls", 
+        "Lite", 
+        "Något", 
+        "Mycket", 
+        "Extremt"
+    ];
+    
+    var arousal = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur negativ k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    var valence = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur intensiv k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    timeline.push(fixation);
+    timeline.push(bild);
+    timeline.push(arousal);
+    timeline.push(valence);
+};
+
+                                                                /* block 4 */
+/* block-instruction */
+var block_instr = {
+    type: "html-keyboard-response",
+    stimulus: "I denna del &auml;r din uppgift att f&ouml;rs&ouml;ka se dig sj&auml;lv fr&aring;n ett" + metascramble[1] + 
+    "perspektiv. Tryck p&aring; valfri knapp f&ouml;r att g&aring; vidare.",
+}
+timeline.push(block_instr);
+
+var i;
+for (i = 20; i < 29; i++) {
+    var bild = {
+        type: "html-keyboard-response",
+         stimulus: `
+        <div style='width: 700px;'>
+        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        choices: jsPsych.NO_KEYS,
+        prompt: captions[i][conditionscramble[0]],
+        trial_duration: 1000, 
+    }
+
+    /* fixation cross*/
+    var fixation = {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+}
+    
+    var scale_1 = [
+        "Inte alls", 
+        "Lite", 
+        "Något", 
+        "Mycket", 
+        "Extremt"
+    ];
+    
+    var arousal = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur negativ k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    var valence = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur intensiv k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    timeline.push(fixation);
+    timeline.push(bild);
+    timeline.push(arousal);
+    timeline.push(valence);
+};
+
+                                                                /* block 5 */
+/* block-instruction */
+var block_instr = {
+    type: "html-keyboard-response",
+    stimulus: "I denna del &auml;r din uppgift att f&ouml;rs&ouml;ka se dig sj&auml;lv fr&aring;n ett" + metascramble[1] + 
+    "perspektiv. Tryck p&aring; valfri knapp f&ouml;r att g&aring; vidare.",
+}
+timeline.push(block_instr);
+
+var i;
+for (i = 20; i < 29; i++) {
+    var bild = {
+        type: "html-keyboard-response",
+         stimulus: `
+        <div style='width: 700px;'>
+        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        choices: jsPsych.NO_KEYS,
+        prompt: captions[i][conditionscramble[1]],
+        trial_duration: 1000, 
+    }
+
+    /* fixation cross*/
+    var fixation = {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+}
+    
+    var scale_1 = [
+        "Inte alls", 
+        "Lite", 
+        "Något", 
+        "Mycket", 
+        "Extremt"
+    ];
+    
+    var arousal = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur negativ k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    var valence = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur intensiv k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    timeline.push(fixation);
+    timeline.push(bild);
+    timeline.push(arousal);
+    timeline.push(valence);
+};
+
+                                                                /* block 6 */
+/* block-instruction */
+var block_instr = {
+    type: "html-keyboard-response",
+    stimulus: "I denna del &auml;r din uppgift att f&ouml;rs&ouml;ka se dig sj&auml;lv fr&aring;n ett" + metascramble[1] + 
+    "perspektiv. Tryck p&aring; valfri knapp f&ouml;r att g&aring; vidare.",
+}
+timeline.push(block_instr);
+
+var i;
+for (i = 20; i < 29; i++) {
+    var bild = {
+        type: "html-keyboard-response",
+         stimulus: `
+        <div style='width: 700px;'>
+        <div style='float: center;'><img src='img/` + bildscramble[i] + `.png'></img>`,
+        choices: jsPsych.NO_KEYS,
+        prompt: captions[i][conditionscramble[2]],
+        trial_duration: 1000, 
+    }
+
+    var fixation = {
+        type: 'html-keyboard-response',
+        stimulus: '<div style="font-size:60px;">+</div>',
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000,
+}
+    var scale_1 = [
+        "Inte alls", 
+        "Lite", 
+        "Något", 
+        "Mycket", 
+        "Extremt"
+    ];
+    
+    var arousal = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur negativ k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    var valence = {
+        type: 'survey-likert',
+        questions: [
+            {prompt: "Hur intensiv k&auml;nsla har du?", labels: scale_1}
+        ]
+    };
+    timeline.push(fixation);
+    timeline.push(bild);
+    timeline.push(arousal);
+    timeline.push(valence);
+};
+
+
+  </script>
+</html>
